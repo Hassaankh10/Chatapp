@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Chat App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="light-mode">
+    <div id="main-app">
+        <aside id="sidebar">
+            <div id="sidebar-header">
+                <h2>Messages</h2>
+                <button id="theme-toggle" class="icon-btn">
+                    <i data-lucide="moon" id="theme-icon"></i>
+                </button>
+            </div>
+            <div id="user-list">
+                <div class="user-item active" data-ip="broadcast">
+                    <div class="user-avatar"><i data-lucide="users"></i></div>
+                    <div class="user-details">
+                        <div class="user-name">General Chat</div>
+                        <div class="user-status">Public Room</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <div id="chat-container">
+            <header id="chat-header">
+                <button id="back-btn" class="mobile-only icon-btn">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="user-info">
+                    <div class="user-avatar" id="header-avatar">?</div>
+                    <div class="user-name" id="header-name">General Chat</div>
+                </div>
+                <div class="header-actions">
+                    <button id="voice-call-btn" class="icon-btn"><i data-lucide="phone"></i></button>
+                    <button id="video-call-btn" class="icon-btn"><i data-lucide="video"></i></button>
+                    <button class="icon-btn"><i data-lucide="info"></i></button>
+                </div>
+            </header>
+            
+            <div id="messages"></div>
+
+            <div id="call-overlay" class="hidden">
+                <div class="video-grid">
+                    <video id="remote-video" autoplay playsinline></video>
+                    <video id="local-video" autoplay playsinline muted></video>
+                </div>
+                <div class="call-info">
+                    <div class="call-status">Calling...</div>
+                    <div class="call-timer">00:00</div>
+                </div>
+                <div class="call-controls">
+                    <button id="toggle-mic" class="call-btn"><i data-lucide="mic"></i></button>
+                    <button id="hangup-btn" class="call-btn end-call"><i data-lucide="phone-off"></i></button>
+                    <button id="toggle-camera" class="call-btn"><i data-lucide="video"></i></button>
+                </div>
+            </div>
+
+            <div id="incoming-call-modal" class="hidden">
+                <div class="modal-content">
+                    <div class="caller-avatar"><i data-lucide="user"></i></div>
+                    <div class="caller-name">Incoming Call...</div>
+                    <div class="modal-actions">
+                        <button id="accept-call" class="call-btn accept"><i data-lucide="phone"></i></button>
+                        <button id="reject-call" class="call-btn reject"><i data-lucide="phone-off"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="confirm-call-modal" class="hidden">
+                <div class="modal-content">
+                    <div class="caller-avatar"><i data-lucide="phone-forwarded"></i></div>
+                    <div class="confirm-text">Start a call with this device?</div>
+                    <div class="modal-actions">
+                        <button id="confirm-start-call" class="call-btn accept"><i data-lucide="check"></i></button>
+                        <button id="cancel-start-call" class="call-btn reject"><i data-lucide="x"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="input-area">
+                <label for="file-upload" class="attachment-btn">
+                    <i data-lucide="paperclip"></i>
+                </label>
+                <input type="file" id="file-upload" hidden>
+                <div id="message-input-container">
+                    <input type="text" id="message-input" placeholder="iMessage" autocomplete="off">
+                    <button id="send-btn">
+                        <i data-lucide="arrow-up"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+</body>
+</html>

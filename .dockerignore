@@ -1,0 +1,10 @@
+.env/
+.git/
+.DS_Store
+*.pem
+uploads/
+__pycache__/
+*.pyc
+*.pyo
+.claude/
+GEMINI.md
