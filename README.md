@@ -82,3 +82,8 @@ docker run -p 5001:5001 -e SECRET_KEY=your-secret-here ghcr.io/<your-username>/c
 - This app is designed for **trusted local networks**. Users are identified only by IP address with no authentication.
 - Uploaded files are stored on the server's disk. Use the volume mount above to keep them between restarts.
 - WebRTC calls go directly between browsers — the server is not involved in the media stream.
+
+
+
+
+
